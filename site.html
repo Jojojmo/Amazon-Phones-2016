@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Celulares Amazon</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="shortcut icon" href="midia/icone.ico" type="image/x-icon">
+</head>
+<body>
+    
+    <header>
+        <a href="site.html"><img class="logo" src="midia/logo1.svg" alt=""></a>
+        <h1>Análise de avaliações da Amazon Americana</h1>
+        <nav>
+            <a href="site.html">Home</a>
+            <a href="templates/explicando_codigo.html">Criação do dataframe</a>
+            <a href="templates/download.html">Baixe os arquivos</a>
+            <a href="templates/sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="motivação">
+            <h1>Motivação</h1>
+            <p>A motivação por trás desse projeto é poder explorar uma base de dados volumosa, que é parecida com as que são encontradas no mercado, gerar uma análise acadêmica, mas que poderia ser posta no dia-a-dia de uma empresa.</p>
+            <p>Durante a elaboração desse artigo, foram exploradas as tecnologias de HTML, CSS, Python e as suas respectivas bibliotecas Pandas e Plotly, ferramentas muito poderosas e úteis na vida do cientista de dados.</p>
+        </section>
+        <section class="introdução">
+            <h1>Apresentação do Dataset</h1>
+                <p>O dataset trabalhado nessa analise está <a href="https://data.world/promptcloud/amazon-mobile-phone-reviews" target="_blank">disponível no site data.word</a>, ele reúne uma série de avaliações de produtos relacionados a celulares na Amazon, assim como os comentários, preços e notas que os consumidores deram. Apesar da sua criação já ser antiga, tendo mais de 6 anos desde sua elaboração, ele ainda continua sendo rico de informação e com um grande volume de dados, possuindo mais de 410 mil linhas e 6 colunas, bem estruturados demonstram um desafio e um grande potencial de análise.</p>
+                <p>Nas análises a seguir, o dataset principal, foi agrupado em dois conjuntos, os que consideravam os produtos e outro para marcas, desse modo, foi estivado suas quantidades, assim como as médias e outros indicadores para cada tipo específico de dado.</p>
+                <p>É importante ressaltar, que nessa análise inicial, não foi trabalhado com o conteúdo das reviews, ou seja, o que foi escrito, assim como a quantidade de votos nas suas reviews. Mas como esse projeto de análise está em desenvolvimento, futuramente pode eles podem ser incorporados.</p>
+                <p>Portanto, esse estudo foi dividido em dois blocos, sendo o primeiro para produtos e o segundo para marcas.</p>
+            <h2>Problemática dos registros</h2>
+                <p>Ao fazer o agrupamento e análise dos dados, foi constatado alguns problemas que poderiam interferir na integridade e autenticidade dos dados.</p>
+                <p>Quando se faz um anúncio em um marketplace, é colocado informações como: nome, descrição, preço, marca entre outras coisas, contudo, por ser uma tarefa humana e que várias pessoas fazem, o registro acaba não tendo uma formatação uniforme.</p>
+                <p>Isso faz com que produtos idênticos tenham nomes diferentes, isso não é um problema se considerarmos que os vendedores também variam os preços, tem maneiras de entrega e atendimento ao cliente totalmente diferentes, isso faz com que mesmo sendo o mesmo produto que dois vendedores estejam ofertando, tenhamos duas experiencias diferentes para o consumidor, dessa forma, anúncios de produtos iguais, tem notas diferentes.</p>
+                <p>Pensando nessa hipótese, testes foram feitos para saber se existiam anúncios com nomes de produtos exatamente iguais, mas com preços diferentes, mas após eles, não foi obtido nenhuma ocorrência. Contudo, foi constatado, que vários produtos não têm marcas registradas, afetando assim uma observação com elas.</p>
+                <p>Outro fator que ficou evidente na análise, são os valores não condizentes com produtos na época, destoando completamente do preço original, as vezes nem contendo o valor do produto, certamente sendo uma má formatação e geração do conjunto de dados.</p>
+                <p>Com esse obstáculo em frente, era necessário tomar uma das duas possíveis soluções: 1° classificar os produtos baseados nos nomes, mas sem saber se eles eram falsificações ou de outra marca, 2° não considerar eles nas análises. Foi optado por desconsiderar produtos sem suas marcas no segundo bloco dessa análise.</p>
+        </section>
+        
+            <section class="bloco 1">
+                <h1>1° Bloco - Análise dos produtos</h1>
+                        <section class="av produtos">
+                    <p>Antes de ver os gráficos, é preciso compreender a faixa de tempo que eles representam, pois, seus dados são do período de até dezembro de 2016, então todos os anúncios são anteriores a esse ponto. Não é preciso saber quantos produtos foram vendidos em comparação a quantidade de produtos avaliados, nem mesmo saber qual é a época exata dos registros de comentários, mas dos produtos que estão contidos no dataset, podemos avaliar as seguintes questões:</p>
+                    <p>Dos 10 produtos mais avaliados, o Iphone 4s dispara em suas avaliações contendo 1451 delas, ficando 210 reviews na frente do segundo produto (também sendo um Iphone 4s mas de cor diferente), que também sendo um Iphone. Apesar de não termos todas as marcas, dos produtos mais avaliados, podemos dizer que pelos seus nomes, a maioria deles são da Apple e da Samsung.</p>
+                    <p>Ao observar da data de lançamento do Iphone 4s foi no ano de 2011, e que o <a href="https://olhardigital.com.br/2017/03/23/pro/apple-domina-lista-dos-smartphones-mais-vendidos-em-2016/" target="_blank">celular mais vendido em 2016 foi o Iphone 6 Plus</a>, mas ele está na posição de número 55, vemos como as avaliações de períodos anteriores influenciam nesse dataset. </p>
+                <div class="container">
+                    <iframe data="charts/barras_mais_av_go.html" height="600px" width="1200px" frameborder="0"></iframe>
+                </div>
+                <div class="container_card">
+                    <iframe class="card" data="charts/card_med_quant.html"    height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                    <iframe class="card" data="charts/card_total_quant.html"  height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                    <iframe class="card" data="charts/card_mediana_quan.html" height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                    <iframe class="card" data="charts/card_desvio_quant.html" height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                </div>
+                    <p>analisando a quantidade de avaliações que cada produto tem, o indicador de sua média é de aproximadamente 94 unidades, contudo, já foi demonstrado que os produtos com mais reviews, tem todos mil unidades, juntamente com a mediana de 18 unidades, percebemos como a média está sendo puxada para cima, graças a uma não homogeneidade e distribuição dos produtos, sendo destacado com um alto desvio padrão, sendo ele de 179 σ</p>
+                        </section>
+                        <section class="montante produtos">
+                <h2>Montante de vendas e problemática com os dados</h2>
+                <p>No gráfico a seguir, é apresentado os maiores montantes de produtos com vendas avaliadas na Amazon, contudo os valores não parecem consistentes com o que era praticado pelo mercado, segundo o DataSet, oito dos dez produtos com maior montante tinham o preço de 2000 dólares, contudo uma rápida pesquisa nos produtos da BLU, mostram que os mesmos <a href="https://www.tecmundo.com.br/blu-studio-5-0c-hd/63334-analise-smartphone-blu-studio-5-0c-hd.htm" target="_blank">modelos custavam na época apenas 150 dolares</a>, um valor completamente discrepante.</p>
+                <div class="container">
+                    <iframe data="charts/barras_mais_vend_go.html" height="600px" width="1200px" frameborder="0"></iframe>
+                </div>
+                <div class="container_card">
+                    <iframe class="card" data="charts/card_med_vend.html"    height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                    <iframe class="card" data="charts/card_total_vend.html"  height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                    <iframe class="card" data="charts/card_mediana_vend.html" height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                    <iframe class="card" data="charts/card_desvio_vend.html" height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                </div>
+                <p>Assim como os produtos, os indicadores podem ter sofrido alterações em seus resultados por conta dos valores destoantes já apresentados, logo, não podemos levar com certeza a quantidade máxima de vendas toais avaliadas, o mesmo valendo para a média, já a mediana, podemos entender que ela representa produtos e marcas menores, já que o mercado de celulares da época abrangia produtos mais distintos entre si, o desvio padrão também reforça isso, sendo bem alto e heterogêneo.</p>
+                        </section>
+                        <section class="notas mais avaliados">
+                <h2>Nota dos produtos mais avaliados</h2>
+                <p>Por sua vez, vamos observar novamente os produtos com mais reviews, mantendo sua ordem, percebemos uma distribuição parecida. Lembrando que as variações das notas nas reviews na Amazon, vão de 1 até 5 estrelas, tendo isso em mente, é possível observar que os modelos antigos como o Iphone 4s tem notas inferiores, já as outros produtos, conseguem ter uma média de nota bem maior, em sua maioria ficando acima da média geral, que é de 3.63, sendo destaque para o Motorola Moto E, o produto com a maior média.</p>
+                <div class="container">
+                    <iframe data="charts/notas_mais_av_go.html" height="600px" width="1200px" frameborder="0"></iframe>
+                </div>
+                <div class="container_card">
+                    <iframe class="card" data="charts/card_med_nota.html"    height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                    <iframe class="card" data="charts/card_meidana_nota.html"  height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                </div>
+                <p>Se observar os indicadores de média geral dos produtos e a mediana, vemos que eles estão bem próximos, demonstrando uma maior conformidade dos usurários naquele período.</p>
+                        </section>
+            </section>
+        <section class="introdução marcas">
+            <h1>2° Bloco - Análise dos produtos</h1>
+            <p>Agora nesse segundo bloco, o foco será analisar os produtos enquanto as marcas que os oferecem, ressalta-se novamente que a partir daqui, não será considerado mais produtos sem marcas, mesmo que o produto possa pertencer a marca em especifico, foi optado que a não classificação na elaboração desse Dataset, não ganharia uma reclassificação, preservando o conteúdo e integridade do original, mesmo que ele careça de informação e que certos valores estejam distorcidos, como já apresentados, os preços de alguns produtos.</p>
+            <p>Separando os produtos em suas devidas marcas, é obtido o número de 329 marcas, tendo seus diversos tamanhos e representações no conjunto de dados, no entanto, ao analisar a média de avaliação das marcas, podemos cair no seguinte problema: Empresas com poucos produtos e poucas avaliações, isso por si só, podem comprometer uma avaliação, já que uma amostragem pequena pode ter uma média menor ou maior se comparado com grandes marcas.</p>
+            <p>Para evitar que marcas desconhecidas que receberam uma nota 5 disparem na classificação, foi estipulado um indicador apresentado no gráfico de dispersão, ele considera as proporções das marcas levando em consideração sua quantidade de produtos, assim como quantidade de avaliações, de modo que quanto mais a empresa se encontre a direita, melhor será sua pontuação, à medida que quanto mais alta no gráfico, melhor será sua qualidade em questão de avaliações.</p>
+            <div class="container">
+                <iframe data="charts/disp_indicador_go.html" height="600px" width="1200px" frameborder="0"></iframe>
+            </div>
+            <div class="container_card">
+                <iframe class="card" data="charts/card_med_ind.html"    height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                <iframe class="card" data="charts/card_mediana_ind.html"  height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                <iframe class="card" data="charts/card_desvio_ind.html" height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+                <iframe class="card" data="charts/card_maior_ind.html" height="auto" width="75%" scrolling="no" frameborder="0"></iframe>
+            </div>
+            <p>Segundo o gráfico de dispersão, sua concentração acaba ficando no início, em seu canto esquerdo, ao ponto que a mediana é um valor baixo de 4.47, representando a grande concentração do gráfico, já a média, consegue ser puxada para cima graças aos outliers, sendo o maior deles a Samsung com o número de 132.8 em seu indicador. Já se desvio padrão, temos como valor 15.54σ demonstrando essa dispersão nos dados, e criando grandes gaps em dentro dele.</p>
+        </section>
+        <section class="avaliações marcas">
+            <h2>Avaliações totais das marcas</h2>
+            <p>A Samsung ser uma das empresas com maior quantidade de avaliações, não é nenhuma novidade, já que ela liderava no indicador anterior, contudo podemos ver uma grande força da BLU nessa análise, sendo muito mais forte e representativa na época, o qual tinha como principal tática de mercado, o uso de White-label e produções chinesas, podendo ser visto com mais detalhes no <a href="https://www.youtube.com/watch?v=xyOrSX4DJq0" target="_blank">vídeo do Tecmundo.</a></p>
+            <p>Já a Apple fica como a terceira empresa mais avaliada, tendo uma diferença imensa com a quarta colocada de mais de 35 mil avaliações.</p>
+            <div class="container">
+                <iframe data="charts/barras_av_marc_go.html" height="600px" width="1200px" frameborder="0"></iframe>
+            </div>
+        </section> 
+        <section class="montante marcas">
+            <h2>Montante de vendas das marcas</h2>
+            <p>Novamente é apresentado o montante que esses todos os produtos avaliados trouxeram para as marcas, tendo em vista que nem todos seus valores condizem com o valor praticado em mercado na época, não podemos indicar com exatidão a representatividade de cada marca.</p>
+            <div class="container">
+                <iframe data="charts/barra_preco_marc_go.html" height="600px" width="1200px" frameborder="0"></iframe>
+            </div>
+        </section>
+        <section class="dispersão preço marcas">
+            <h2>Dispersão por preço das marcas</h2>
+            <p>Tendo uma relação de quantidade média vendida com o preço dos produtos, é alcançado o gráfico a seguir. Ele mostra a dispersão de todas as marcas, tendo uma grande concentração logo em seu início, demonstrando que a maioria da média de venda dos produtos avaliados na Amazon, não chegam a mais de 100 unidades, tendo preços médios dos produtos que flutuam bastante, mas que ficam em sua grande parte concentrados nos valores de até 150 dólares.</p>
+            <p>Infelizmente, não é possível saber com exatidão os valores certos em seus preços, já que vários produtos tiveram seus preços afetados por um registro não condizente com o preço de mercado, podendo ser visto nos outliners de preço, o qual não são marcas de luxo.</p>
+            <div class="container">
+                <iframe data="charts/disp_preco_go.html" height="600px" width="1200px" frameborder="0"></iframe>
+            </div>
+        </section>
+        <seciton class="conclusão">
+            <h1>Conclusão</h1>
+            <p>O dataset estudado apresentou um grande conjunto de dados, o qual evidenciou comportamentos e tendências da época. Vimos que no período, os celulares mais vendidos do ano, não tinham a maior quantidade de reviews, demonstrando o ecossistema da Amazon armazenava produtos mais antigos, porém populares da época.</p>
+            <p>Ficou evidente o problema do dataset em registrar seus dados, já que vários anúncios não tinham valores correspondentes com a realidade ou até mesmo o registro de marcas. Além de existir vários produtos idênticos, mudando só a descrição ou a cor do produto, mas como não existiam o nome da loja anunciante, não puderam ser agrupados.</p>
+            <p>Pode-se dizer que a limpeza e organização desse dataset daria um artigo próprio, assim como os textos das próprias reviews, algo que não foi aprofundado nesse trabalho.</p>
+            <p>Por fim, o período que esse conjunto de dados foi registrado, demonstrava uma grande alta nos produtos da Sansung, Apple e até mesmo a BLU, marcas que foram bem representativas e comentadas durante o artigo, entender o que levou essas empresas a ficarem em alta nesse faixa de tempo e suas estratégias, são um cenário intrigante que só um estudo aprofundado poderia responder.</p>
+            <p>Por conta disso, e de várias outras experiências, que estudar ciência de dados é tão intrigante!</p>
+        </seciton>
+
+        
+
+
+        <script src="scripts/lazy.js"></script>
+    </main>
+    <footer>
+        <h2>Criado por: João Matheus Oliveira</h2>
+        <div>
+            <a href="https://github.com/Jojojmo" target="_blank"><img id="github" src="midia/github_white.svg" alt=""></a>
+            <a href="https://www.linkedin.com/in/joão-matheus-oliveira-107b98179/" target="_blank"><img id="linkedin" src="midia/linkedin_white.svg" alt=""></a>
+        </div>
+    </footer>
+</body>
+</html>

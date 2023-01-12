@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criando o dataframe</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/terminal_style.css">
+    <link rel="shortcut icon" href="../midia/icone.ico" type="image/x-icon">
+
+</head>
+<body>
+        
+    <header>
+        <a href="../site.html"><img class="logo" src="../midia/logo1.svg" alt=""></a>
+        <h1>Análise de avaliações da Amazon Americana</h1>
+        <nav>
+            <a href="../site.html">Home</a>
+            <a href="explicando_codigo.html">Criação do dataframe</a>
+            <a href="download.html">Baixe os arquivos</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="text-align: center;">Dataframe Principal</h2>
+        <p>Nessa página, será descrito em linhas gerais, como foi criado o Dataframe principal das análises, baseado no Dataset obtido. Caso você queira ver todos os códigos, não somente a introdução a alguns deles, se sinta a vontade em baixar os <a href="download.html">Arquivos usados</a>, neles você terá todos os notebooks, gráficos e o dataset dessa análise.</p>
+        <h2 style="text-align: center;">Importando bibliotecas</h2>
+        <p>Os gráficos e manipulação do dataset, foi feito inteiramente na linguagem Python. As três principais bibliotecas utilizadas nesse projeto foram: O Pandas e Numpy, que são  amplamente conhecidas na análise de dados e oferecem diversas ferramentas para você trabalhar com elas.</p>
+        <p>Já o Plotly é uma biblioteca ideal para a criação de gráficos, principalmente os interativos, nesse projeto, foi optado utilizar a versão graph objects, que oferece uma gama maior de ferramentas e personalização nas execução de visualizações.</p>
+        <br>
+        <div class="terminal">
+            <div class="box">
+                <div class="bar">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <p>1 <span style="color:var(--import)">import</span> <span style="color:var(--biblioteca)">pandas</span> <span style="color:var(--import)">as</span> <span style="color:var(--biblioteca)">pd</span> <br>
+                   2 <span style="color:var(--import)">import</span> <span style="color:var(--biblioteca)">numpy</span> <span style="color:var(--import)">as</span> <span style="color:var(--biblioteca)">np</span> <br>
+                   3 <span style="color:var(--import)">import</span> <span style="color:var(--biblioteca)">plotly.graph_objects</span> <span style="color:var(--import)">as</span> <span style="color:var(--biblioteca)">go</span></p>
+            </div>
+            <h2>Definindo o Dataset</h2>
+            <p>Para definir o dataset na biblioteca pandas, foi utilizado o arquivo em .csv (um tipo de arquivo separado por vírgulas), como ele já estava formatado no padrão americano, sem caracteres especiais ou monetários, além dos tipos corretos nas suas columns, não houve a necessidade de um tratamento muito refinado nessa parte. Nele, continham 6 columns e mais de 410 mil rows.</p>
+            <br>
+            <div class="box" >
+                <div class="bar">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <p>1 <span style="color: #2cffff;">df_cel</span> = <span style="color: var(--biblioteca);">pd</span><span style="color: var(--função)">.read_csv</span><span style="color: var(--amarelo);">(</span><span style="color: #EC6A5F;">'Amazon_Unlocked_Mobile.csv'</span>, <span style="color: var(--variavel);">sep</span>=<span style="color: var(--string);">','</span><span style="color: var(--amarelo);">)</span> <br>
+                   2 <span style="color: var(--função);">display</span><span style="color: var(--amarelo);">(</span><span style="color: #2cffff;;">df_cel</span><span style="color: var(--amarelo);">)</span></p>
+            </div>
+            <h2>Criando um recorte</h2>
+            <p>Nesse notebook, foi adicionado uma nova column chamada de “contador”, ela serviu para saber a quantidade de vezes que cada produto foi avaliado. Seguindo o Script, é observado a criação da variável recorte_produto, que pelo seu nome autoexplicativo, se referia a um data frame com algumas colunas do original. </p>
+            <p>Podemos observar o uso da função .groupby() para agrupar os itens das rows baseadas no nome do produto, seguidamente, todos os valores foram somados com a função .sum().</p>
+            <p>Uma nova columns é criada, dessa vez responsável por armazenar os dados de médias de cada produto, ela foi gerada baseada na divisão da soma total das avaliações pela quantidade de produtos.  Após isso, foram ordenados os valores baseados em sua quantidade, na ordem decrescente. Assim, o recorte do dataset ficou com 4410 rows e apenas 3 colunas.</p>
+            <br>
+            <div class="box" >
+                <div class="bar">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <p>1 <span style="color: var(--variavel);">df_cel</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">'contador'</span><span style="color: var(--amarelo);">]</span> = <span style="color: var(--numero);">1</span> <br>
+                   2 <br>
+                   3 <span style="color: var(--variavel);">recorte_produto</span> = <span style="color: var(--variavel);">df_cel</span><span style="color: var(--amarelo);">[</span><span style="color: var(--import);">[</span><span style="color: var(--string);">"Product Name","Rating","contador"</span><span style="color: var(--import);">]</span><span style="color: var(--amarelo);">]</span>.<span style="color: var(--função);">groupby</span><span style="color: var(--amarelo);">(</span><span style="color: var(--string);">"Product Name"</span><span style="color: var(--amarelo);">)</span>.<span style="color: var(--função);">sum</span><span style="color: var(--amarelo);">(</span><span style="color: var(--amarelo);">)</span> <br>
+                   4 <span style="color: var(--variavel);">recorte_produto</span><span><span style="color: var(--amarelo);">[</span></span><span><span style="color: var(--string);">'media'</span></span style="color: var(--string);"><span style="color: var(--amarelo);">]</span> = <span style="color: var(--variavel);">recorte_produto</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"Rating"</span><span style="color: var(--amarelo);">]</span> / <span style="color: var(--variavel);">recorte_produto</span><span style="color: var(--amarelo);"><span style="color: var(--amarelo);">[</span></span><span style="color: var(--string);">"contador"</span><span style="color: var(--amarelo);">]</span> <br>
+                   5 <span style="color: var(--variavel);">recorte_produto</span> = <span style="color: var(--variavel);">recorte_produto</span style="color: var(--variavel);">.<span style="color: var(--função);">sort_values</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">by</span>=<span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"contador"</span><span style="color: var(--amarelo);">]</span>,<span style="color: var(--variavel);">ascending</span>=<span style="color: var(--log);">False</span><span style="color: var(--amarelo);">)</span> <br>
+                   6 <br>
+                   7 <span style="color: var(--função);">display</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">recorte_produto</span><span style="color: var(--amarelo);">)</span></p>
+            </div>
+            <h2>Refinando o Dataframe</h2>
+            <p>Agora era a hora de criar o data frame principal para o uso nas análises, portanto foi criado usando a variável recorte_produto, nela foi utilizado todas as columns da variável, mas agora com novos nomes, o índice também foi utilizado, mas dessa vez como column, já que ao usar o .groupby, ele tem a propriedade de gerar um novo índice baseado no filtro utilizado nele. Em seguida o índice é resetado e o eixo que corresponde ao antigo index foi descartado.</p>
+            <br>
+            <div class="box" >
+                <div class="bar">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <p>
+                    1 <span style="color: var(--variavel);">df_cel_agrupado</span> = <span style="color: var(--biblioteca);">pd</span>.<span style="color: var(--biblioteca);">DataFrame</span><span style="color: var(--amarelo);">(</span><span style="color: var(--import);">{</span><span style="color: var(--string);">"produto"</span>:<span style="color: var(--variavel);">recorte_produto.index</span>,<br>
+                    2 &emsp;&emsp;&emsp;&emsp; <span style="color: var(--string);">"nota"</span>:<span style="color: var(--variavel);">recorte_produto</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"Rating"</span><span style="color: var(--amarelo);">],</span><br>
+                    3 &emsp;&emsp;&emsp;&emsp; <span style="color: var(--string);">"qtd avaliacao"</span>:<span style="color: var(--variavel);">recorte_produto</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"contador"</span><span style="color: var(--amarelo);">]</span>,<br>
+                    4 &emsp;&emsp;&emsp;&emsp; <span style="color: var(--string);">"media"</span>:<span style="color: var(--variavel);">recorte_produto</span><span style="color: var(--amarelo);">[</span><span><span style="color: var(--string);">"media"</span></span><span style="color: var(--amarelo);">]</span><span style="color: var(--import);">}</span><span style="color: var(--amarelo);">)</span>.<span style="color: var(--função);">reset_index</span><span style="color: var(--amarelo);">(</span><span style="color: var(--amarelo);">)</span><br>
+                    5 <br>
+                    6 <span style="color: var(--variavel);">df_cel_agrupado</span> = <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--função);">.drop</span><span style="color: var(--amarelo);">(</span><span style="color: var(--string);">"Product Name"</span>, <span style="color: var(--variavel);">axis</span>=<span style="color: var(--numero);">1</span><span style="color: var(--amarelo);">)</span> <br>
+                    7 <span style="color: var(--função);">display</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">)</span><br>
+                    8
+                </p>
+            </div>
+            <h2>Elaborando um dataframe de apoio</h2>
+            <p>Para finalizar o data frame, era necessário das informações de preço, assim como marcas, para que isso ocorra, foi optado por gerar uma variável chamada de df_s_dupli, um data frame o qual armazenava apenas itens não repetidos, optando por registrar apenas a primeira vez que um item aparecia.</p>
+            <p>Com um dataframe sem duplicatas, gerar funções para mesclar as colunas que coincidiam os nomes dos produtos, ficou muito mais  palpável, já que opções como merge, Join e até mesmo concatenate, se feitas de mal jeito, seriam muito custosas e poluiriam o data frame que estava em formação.</p>
+            <br>
+            <div class="box" >
+                <div class="bar">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <p>
+                   1 <span style="color: var(--variavel);">df_s_dupli</span> = <span style="color: var(--variavel);">df_cel</span>.<span style="color: var(--função);">drop_duplicates</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">subset</span>=<span style="color: var(--string);">"Product Name"</span>,<span style="color: var(--variavel);">keep</span>=<span style="color: var(--string);">"first"</span><span style="color: var(--amarelo);">)</span> <br>
+                   2 <span style="color: var(--função);">display</span><span style="color: var(--amarelo);">(</span><span  style="color: var(--variavel);">df_s_dupli</span><span style="color: var(--amarelo);">)</span> <br>
+                   3
+                </p>
+            </div>
+            <h2>Puxando preços e mercas</h2>
+            <p>Para terminar o data frame e começar a gerar os gráficos e análises para o estudo, foi optado pela utilização do método .apply() para capturar os dados faltantes, para que a função .apply() funcione, era necessário criar duas novas funções que seriam utilizadas para criar as novas columns, foram elas: valor() e brand().</p>
+            <p>Durante a execução da função valor(), era declarada uma variável chamada clean, responsável por capturar itens iguais aos recebidos e fazer a limpeza delas, já que por sua vez, elas vinham como uma descrição de um array, contendo o índice de onde aquele valor era retirado, de qual coluna e tipo de dado, como isso poderia ser interpretado como um objeto dentro do data frame.</p>
+            <p>Além de poluir muito o conteúdo da row, foi feito uma limpeza durante o processo da função, seguidamente por converter o valor do clean para um ponto flutuante, por fim, a função retorna o valor limpo para o código e o apply continua.</p>
+            <p>A função brand() segue um caminho bem parecido com a valor(), apenas mudando a column que é retirado o valor correspondente e a não conversão da string para ponto flutuante.</p>
+            <p>No final, é definido mais uma column, utilizando o valor da quantidade de avaliações multiplicado ao valor, para assim gerar o valor total que o produto avaliado arrecadou apenas em reviews.</p>
+            <br>
+            <div class="box" style="max-width: 980px; ">
+                <div class="bar" style="max-width: 980px;">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <p>
+                     1 <span style="color: var(--log);">def </span><span style="color: var(--função);">valor</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">val</span><span style="color: var(--amarelo);">)</span>:<br>
+                     2&emsp;&emsp; <span style="color: var(--variavel);">clean</span> = <span style="color: var(--variavel);">df_s_dupli</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"Price"</span><span style="color: var(--amarelo);">]</span><span style="color: var(--variavel);">.loc</span><span style="color: var(--amarelo);">[</span><span style="color: var(--variavel);">df_s_dupli</span><span style="color: var(--import);">[</span><span style="color: var(--string);">"Product_Name"</span><span style="color: var(--import);">]</span>
+                    ==<span style="color: var(--variavel);"> val</span><span style="color: var(--amarelo);">]</span><br>
+                     3&emsp;&emsp; <span style="color: var(--variavel);">clean</span> =<span style="color: var(--variavel);">clean</span><span style="color: var(--none);">.</span><span style="color: var(--função);">reset_index</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">drop</span>=<span style="color: var(--log);">True</span><span style="color: var(--função);">).to_string</span><span style="color: var(--amarelo);">(</span><span style="color: var(--amarelo);">)</span><br>
+                     4&emsp;&emsp; <span style="color: var(--variavel);">clean</span> = <span style="color: var(--variavel);">clean</span><span style="color: var(--amarelo);">[</span><span style="color: var(--numero);">1:</span><span style="color: var(--função);">].strip</span><span style="color: var(--amarelo);">(</span><span style="color: var(--amarelo);">)</span><br>
+                     5&emsp;&emsp; <span style="color: var(--variavel);">clean</span> = <span style="color: var(--função);">float</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">clean</span><span style="color: var(--amarelo);">)</span><br>
+                     6&emsp;&emsp; <span style="color: var(--import);">return</span> <span style="color: var(--variavel);">clean</span><br>
+                     7 <br>
+                     8 <span style="color: var(--log);">def</span> <span style="color: var(--função);">brand</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">val</span><span style="color: var(--amarelo);">)</span>:<br>
+                     9&emsp;&emsp; <span style="color: var(--variavel);">clean</span> = <span style="color: var(--variavel);">df_s_dupli</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"Brand_Name"</span><span style="color: var(--amarelo);">]</span><span style="color: var(--variavel);">.loc</span><span style="color: var(--amarelo);">[</span><span style="color: var(--variavel);">df_s_dupli</span><span style="color: var(--import);">[</span><span style="color: var(--string);">"Product_Name"</span><span style="color: var(--import);">]</span> ==
+                    <span style="color: var(--variavel);">val</span><span style="color: var(--amarelo);">]</span><br>
+                    10&emsp; <span style="color: var(--variavel);">clean</span> = <span style="color: var(--variavel);">clean</span><span style="color: var(--função);">.reset_index</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">drop</span> = <span style="color: var(--log);">True</span><span style="color: var(--amarelo);">)</span><span style="color: var(--função);">.to_string</span><span style="color: var(--amarelo);">(</span><span style="color: var(--amarelo);">)</span><br>
+                    11&emsp; <span style="color: var(--variavel);">clean</span>=<span style="color: var(--variavel);">clean</span><span style="color: var(--amarelo);">[</span><span style="color: var(--numero);">1:</span><span style="color: var(--amarelo);">]</span><span style="color: var(--função);">.strip</span><span style="color: var(--amarelo);">(</span><span style="color: var(--amarelo);">)</span><br>
+                    12&emsp; <span style="color: var(--import);">return</span>
+                    <span style="color: var(--variavel);">clean</span><br>
+                    13 <br>
+                    14 <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"valor"</span><span style="color: var(--amarelo);">]</span> = <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"produto"</span><span style="color: var(--amarelo);">]</span><span style="color: var(--none);">.</span><span style="color: var(--função);">apply</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">valor</span><span style="color: var(--amarelo);">)</span><br>
+                    15 <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"marca"</span><span style="color: var(--amarelo);">]</span> = <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"produto"</span><span style="color: var(--amarelo);">]</span><span style="color: var(--none);">.</span><span style="color: var(--função);">apply</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">brand</span><span style="color: var(--amarelo);">)</span><br>
+                    16 <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"valor_total"</span><span style="color: var(--amarelo);">]</span> = <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"qtd_avaliacao"</span><span style="color: var(--amarelo);">]</span> <span style="color: var(--none);">*</span> <span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">[</span><span style="color: var(--string);">"valor"</span><span style="color: var(--amarelo);">]</span><br>
+                    17 <br>
+                    18 <span style="color: var(--função);">display</span><span style="color: var(--amarelo);">(</span><span style="color: var(--variavel);">df_cel_agrupado</span><span style="color: var(--amarelo);">)</span>
+                </p>
+            </div>
+        </div>
+
+
+
+    </main>
+    <footer>
+        <h2>Criado por: João Matheus Oliveira</h2>
+        <div>
+            <a href="https://github.com/Jojojmo" target="_blank"><img id="github" src="../midia/github_white.svg" alt=""></a>
+            <a href="https://www.linkedin.com/in/joão-matheus-oliveira-107b98179/" target="_blank"><img id="linkedin" src="../midia/linkedin_white.svg" alt=""></a>
+        </div>
+    </footer>
+</body>
+</html>

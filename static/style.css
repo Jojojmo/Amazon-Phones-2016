@@ -1,0 +1,283 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "Oswald";
+    src: url("fonts/Oswald-ExtraLight.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face{
+    font-family: "lato";
+    src: url("fonts/Lato-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+:root {
+    --cor_tema: #253340;
+    --cor_analoga: #177FBF;
+    --cor_contraste: #F28705;
+    --cor_claro: #F2F2F2;
+    --cor_escuro:#0D0D0D;
+    --font_padrao: Arial, Verdana, Helvetica, sans-serif;
+}
+
+body {
+    background-color: var(--cor_claro);
+    width: auto;
+    margin: 0px;
+
+
+}
+
+header {
+    background-color: var(--cor_tema);
+    text-align: center;
+    width: 100%;
+    padding: 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+
+}
+
+header > h1 {
+    color: var(--cor_claro);
+    font-family: var(--font_padrao);
+    font-family: "oswald";
+    font-weight: 600; 
+    
+}
+
+nav {
+    position: absolute;
+    margin-top: 100px;
+
+}
+
+.logo {
+    width: 47px;
+    height: 75px;
+    display: inline-flex;
+    position: relative;
+    padding: 5px;
+    margin: 21px 15px 0px 0px;
+
+}
+
+nav > a {
+    padding: 15px;
+    font-family: "oswald";
+    color: var(--cor_claro);
+    text-decoration: none;
+    transition-duration: 0.5s;
+}
+
+nav > a:hover {
+    text-decoration: underline;
+    background-color: var(--cor_contraste);
+}
+
+main {
+    background-color: var(--cor_claro);
+    min-width: 460px;
+    max-width: 1140px; 
+    margin:auto;
+    padding: 170px 10px 80px 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.486);
+    border-radius: 0px 0px 10px 10px;
+    
+}
+
+main p, li{
+    font-family: "lato";
+    text-align: justify;
+    margin-left: 125px;
+    margin-right: 125px;
+    margin-bottom: -5px;
+    text-indent: 30px;
+
+}
+
+h1 {
+    font-family: "oswald";
+    font-weight: 900;
+    font-size: 2.4em;
+    text-align: center;
+    color: var(--cor_contraste); 
+}
+
+h2 {
+    font-family: "oswald";
+    font-weight: 900;
+    font-size: 2em;
+    text-align: left;
+    margin-left: 125px;
+    margin-right: 125px;
+    text-indent: 30px;
+    color: var(--cor_tema);
+}
+
+a {
+    color: var(--cor_contraste);
+}
+
+
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.container_card{
+    display: flex;
+    flex-direction: row;
+    flex-direction: center;
+    min-width: 320px;
+    max-width: 1140px;
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+}
+
+.container_card > iframe {
+    aspect-ratio: 1;
+}
+
+
+
+.card{
+    display: inline-flex;
+    width: 350px;
+    height: 350px;
+    transform: scale(0.7,0.7);
+    flex-shrink: 1;
+    margin: -3%;
+    
+}
+
+footer {
+    background-color: var(--cor_tema);
+    height: auto;
+    width: auto;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+    display: flex;
+    justify-content: space-between
+
+}
+
+footer > h2 {
+    text-align: left;
+    font-family: "oswald";
+    font-weight: 300;
+    font-size: 0.8em;
+    color: var(--cor_claro);
+    margin-left: -15px;
+
+}
+
+#github{
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-right: 15px;
+    display: inline;
+}
+
+#linkedin{
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-right: 15px;
+    display: inline;
+}
+
+@media (max-width: 1150px){
+    .card{
+
+        flex-shrink: 1;
+        margin: -10% -10% -90% 0%;
+    }
+
+    .container_card{
+
+        min-width: 560px;
+        max-width: 640px;
+        height: 500px;
+        flex-wrap: wrap;
+        position: relative;
+        margin: auto;
+    
+    }
+
+}
+
+@media (max-width: 650px){
+
+    main p,h2,li {
+
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+@media (max-width: 630px){
+    .card{
+
+        transform: scale(0.7,0.7);
+        flex-shrink: 1;
+        justify-content: center;
+        justify-items: center;
+        
+    }
+    .container_card{
+
+        min-width: 420px;
+        max-width: 630px;
+        height: 500px;
+        flex-wrap: wrap;
+        position: relative;
+        justify-content: center;
+        justify-items: center;
+        padding-bottom: 10%;
+    }
+    
+    main p,h2,li {
+
+        margin-left: 50px;
+        margin-right: 50px;
+
+    }
+    header > h1 {
+        font-size: 2.1em;
+        margin-left: -40px ;
+    }
+
+
+}
+
+
+@media (max-width: 555px){
+    nav {
+        margin-top: 135px;
+        
+    }
+}
+
+
+
+@media (max-width: 626px){
+    .logo {
+        margin: 21px 40px 0px 0px;
+    }
+
+}
+

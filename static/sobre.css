@@ -1,0 +1,48 @@
+#dev_img {
+    display: block;
+    padding: 10px;
+}
+
+#grid_sobre {
+    display: grid;
+    
+    grid-template-columns: repeat(5,20%);
+    grid-template-areas: "img txt txt txt txt txt"
+                         "img txt txt txt txt txt"
+                         "img txt txt txt txt txt"
+                         "img txt txt txt txt txt"
+                         "nan nan nan nan nan nan";
+    
+
+}
+
+#grid_sobre_img {
+    grid-area: img;
+    padding-top: 30px;
+    grid-column-end: none;
+}
+#grid_sobre_txt {
+    grid-area: txt;
+    margin-left: 40px;
+}
+
+.icon_sobre {
+    width: 40px;
+    height: 40px;
+    margin: 20px 0px -15px 220px;
+    display: inline;
+}
+
+.p_grid_sobre {
+    font-family: "Oswald";
+    font-size: 1.4em;
+    margin-bottom: -55px;
+    font-weight: bold;
+    color: var(--cor_analoga);
+}
+
+@media (max-width: 650px) {
+    .icon_sobre {
+    margin: 20px 0px -15px 150px;
+}
+}
